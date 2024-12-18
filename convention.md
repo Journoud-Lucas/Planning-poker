@@ -31,6 +31,7 @@
 			- Pointer -> p
 
 			- Object name (without the q for qt objects)
+			- Vector -> vec
 
 	- Some variable types must have a suffix. If your variable follows more than one of these instructions, do them all in order.
 
