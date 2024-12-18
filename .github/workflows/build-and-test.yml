@@ -1,0 +1,33 @@
+name: Generate Doxygen Documentation
+
+on:
+  push:
+    branches:
+      - main  # ou 'master' selon ton nom de branche
+  pull_request:
+    branches:
+      - main  # ou 'master' selon ton nom de branche
+
+jobs:
+  doxygen:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Doxygen
+        run: sudo apt-get install doxygen
+
+      - name: Generate Doxygen documentation
+        run: doxygen Doxyfile  # Assure-toi que ton fichier Doxyfile est à la racine du dépôt
+
+      - name: Upload documentation to GitHub Pages
+        if: success()
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          deploy_key: ${{ secrets.DEPLOY_KEY }}
+          publish_dir: ./html  # Le répertoire où Doxygen génère la documentation (par défaut 'html')
+
+      - name: Clean up
+        run: rm -rf ./html  # Nettoyer après le déploiement si nécessaire
