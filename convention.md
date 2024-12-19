@@ -47,7 +47,7 @@
 
 - Acolades must be on a single line.
 
-- Functions must not exceed 60 lines in length.
+- ~~Functions must not exceed 60 lines in length.~~ I try, but it's not the case for every function.
 
 - For header files, their extensions must be .h and not .hpp.
 
