@@ -92,18 +92,55 @@ $(function() {
 <li><b>Fin de la session :</b> Lorsqu'un concensus est atteint, la moyenne (ou autre dépendamment du mode choisi) est enregistré dans le JSON. Quand l'estimation a eu lieu pour chaque tâche, le JSON est terminé.</li>
 </ol>
 <h2><a class="anchor" id="autotoc_md12"></a>
+🛠️ Configuration de l'Environnement de Compilation</h2>
+<p>Pour compiler et exécuter l'application Planning Poker sur votre ordinateur, vous aurez besoin de certains outils et bibliothèques. Voici un guide pour vous aider à configurer votre environnement de développement :</p>
+<h3><a class="anchor" id="autotoc_md13"></a>
+Prérequis</h3>
+<ol type="1">
+<li><b>Système d'exploitation requis :</b><ul>
+<li>Windows</li>
+<li>Le programme devrait fonctionner sous MAC et Linux, mais aucun test n'as été effectué dessus.</li>
+</ul>
+</li>
+<li><b>Qt Framework :</b><ul>
+<li>L'application utilise le framework Qt pour l'interface utilisateur. Vous devez installer Qt version 6.7.3. Vous pouvez le télécharger depuis <a href="https://www.qt.io/download">qt.io</a>.</li>
+</ul>
+</li>
+<li><b>Compilateur C++ :</b><ul>
+<li>Assurez-vous d'avoir un compilateur compatible avec C++17. J'ai utilisé MSVC 2022 v6.7.3 64bit, séléctionnés lors de l'installation de Qt.</li>
+</ul>
+</li>
+<li><b>Modules Qt :</b><ul>
+<li>Seuls les modules QT Core, QT GUI et QT Widgets qui sont dans l'installation de base de Qt ont été utilisés.</li>
+</ul>
+</li>
+<li><b>Visual Studio :</b><ul>
+<li>Afin d'utiliser Qt sous Visual Studio, vous devez installer l'extension Qt Visual Studio Tools, puis dans les paramètres de l'extension, allez dans <code>Versions</code> et ajoutez le chemin vers votre version de Qt. Exemple: <code>C:\Qt\6.7.3\msvc2022_64</code></li>
+</ul>
+</li>
+</ol>
+<h3><a class="anchor" id="autotoc_md14"></a>
+Instructions de Compilation</h3>
+<ol type="1">
+<li><b>Compiler le projet :</b><ul>
+<li>Sur <b>Windows</b> avec Visual Studio : Ouvrez le fichier <code>.sln</code> généré dans Visual Studio et construisez la solution.</li>
+</ul>
+</li>
+<li><b>Exécuter l'application :</b> Une fois la compilation réussie, vous pouvez exécuter l'application.</li>
+</ol>
+<h2><a class="anchor" id="autotoc_md15"></a>
 🔢 Versionnage</h2>
 <p>Ce projet suit un schéma de <a href="https://semver.org/">versionnement sémantique</a>.</p>
-<h2><a class="anchor" id="autotoc_md13"></a>
+<h2><a class="anchor" id="autotoc_md16"></a>
 🤝 Crédits</h2>
 <p>Ce projet a été créé par:</p><ul>
 <li>BESSAD Tarek</li>
 <li>JOURNOUD Lucas</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md14"></a>
+<h2><a class="anchor" id="autotoc_md17"></a>
 📄 Licence</h2>
 <p>Ce logiciel est sous <a href="https://unlicense.org/">Unlicense</a>, dont les termes sont disponibles dans <a href="UNLICENSE.txt">UNLICENSE.txt</a>.</p>
-<h2><a class="anchor" id="autotoc_md15"></a>
+<h2><a class="anchor" id="autotoc_md18"></a>
 📜 Remerciements</h2>
 <p>Nous remercions tout particulièrement notre professeur de conception agile de projets informatiques, monsieur Valentin Lachand-Pascal. </p>
 </div></div><!-- contents -->

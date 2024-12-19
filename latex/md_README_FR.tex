@@ -18,12 +18,45 @@ Il s\textquotesingle{}agit d\textquotesingle{}un petit projet fait pour \href{ht
 \item {\bfseries{Lancement de sessions \+:}} Commencez une session, et entrez les participants.
 \item {\bfseries{Estimation des tâches \+:}} Les joueurs font leur estimation tour a tour pour chaque tâches. Ils peuvent utiliser a tout moment la carte café pour mettre en pause le programme.
 \item {\bfseries{Fin de la session \+:}} Lorsqu\textquotesingle{}un concensus est atteint, la moyenne (ou autre dépendamment du mode choisi) est enregistré dans le JSON. Quand l\textquotesingle{}estimation a eu lieu pour chaque tâche, le JSON est terminé.
-\end{DoxyEnumerate}\hypertarget{md_README_FR_autotoc_md12}{}\doxysubsection{🔢 Versionnage}\label{md_README_FR_autotoc_md12}
-Ce projet suit un schéma de \href{https://semver.org/}{\texttt{ versionnement sémantique}}.\hypertarget{md_README_FR_autotoc_md13}{}\doxysubsection{🤝 Crédits}\label{md_README_FR_autotoc_md13}
+\end{DoxyEnumerate}\hypertarget{md_README_FR_autotoc_md12}{}\doxysubsection{🛠️ Configuration de l\textquotesingle{}\+Environnement de Compilation}\label{md_README_FR_autotoc_md12}
+Pour compiler et exécuter l\textquotesingle{}application Planning Poker sur votre ordinateur, vous aurez besoin de certains outils et bibliothèques. Voici un guide pour vous aider à configurer votre environnement de développement \+:\hypertarget{md_README_FR_autotoc_md13}{}\doxysubsubsection{Prérequis}\label{md_README_FR_autotoc_md13}
+
+\begin{DoxyEnumerate}
+\item {\bfseries{Système d\textquotesingle{}exploitation requis \+:}}
+\begin{DoxyItemize}
+\item Windows
+\item Le programme devrait fonctionner sous MAC et Linux, mais aucun test n\textquotesingle{}as été effectué dessus.
+\end{DoxyItemize}
+\item {\bfseries{Qt Framework \+:}}
+\begin{DoxyItemize}
+\item L\textquotesingle{}application utilise le framework Qt pour l\textquotesingle{}interface utilisateur. Vous devez installer Qt version 6.\+7.\+3. Vous pouvez le télécharger depuis \href{https://www.qt.io/download}{\texttt{ qt.\+io}}.
+\end{DoxyItemize}
+\item {\bfseries{Compilateur C++ \+:}}
+\begin{DoxyItemize}
+\item Assurez-\/vous d\textquotesingle{}avoir un compilateur compatible avec C++17. J\textquotesingle{}ai utilisé MSVC 2022 v6.\+7.\+3 64bit, séléctionnés lors de l\textquotesingle{}installation de Qt.
+\end{DoxyItemize}
+\item {\bfseries{Modules Qt \+:}}
+\begin{DoxyItemize}
+\item Seuls les modules QT Core, QT GUI et QT Widgets qui sont dans l\textquotesingle{}installation de base de Qt ont été utilisés.
+\end{DoxyItemize}
+\item {\bfseries{Visual Studio \+:}}
+\begin{DoxyItemize}
+\item Afin d\textquotesingle{}utiliser Qt sous Visual Studio, vous devez installer l\textquotesingle{}extension Qt Visual Studio Tools, puis dans les paramètres de l\textquotesingle{}extension, allez dans {\ttfamily Versions} et ajoutez le chemin vers votre version de Qt. Exemple\+: {\ttfamily C\+:\textbackslash{}Qt\textbackslash{}6.\+7.\+3\textbackslash{}msvc2022\+\_\+64}
+\end{DoxyItemize}
+\end{DoxyEnumerate}\hypertarget{md_README_FR_autotoc_md14}{}\doxysubsubsection{Instructions de Compilation}\label{md_README_FR_autotoc_md14}
+
+\begin{DoxyEnumerate}
+\item {\bfseries{Compiler le projet \+:}}
+\begin{DoxyItemize}
+\item Sur {\bfseries{Windows}} avec Visual Studio \+: Ouvrez le fichier {\ttfamily .sln} généré dans Visual Studio et construisez la solution.
+\end{DoxyItemize}
+\item {\bfseries{Exécuter l\textquotesingle{}application \+:}} Une fois la compilation réussie, vous pouvez exécuter l\textquotesingle{}application.
+\end{DoxyEnumerate}\hypertarget{md_README_FR_autotoc_md15}{}\doxysubsection{🔢 Versionnage}\label{md_README_FR_autotoc_md15}
+Ce projet suit un schéma de \href{https://semver.org/}{\texttt{ versionnement sémantique}}.\hypertarget{md_README_FR_autotoc_md16}{}\doxysubsection{🤝 Crédits}\label{md_README_FR_autotoc_md16}
 Ce projet a été créé par\+:
 \begin{DoxyItemize}
 \item BESSAD Tarek
 \item JOURNOUD Lucas
-\end{DoxyItemize}\hypertarget{md_README_FR_autotoc_md14}{}\doxysubsection{📄 Licence}\label{md_README_FR_autotoc_md14}
-Ce logiciel est sous \href{https://unlicense.org/}{\texttt{ Unlicense}}, dont les termes sont disponibles dans \href{UNLICENSE.txt}{\texttt{ UNLICENSE.\+txt}}.\hypertarget{md_README_FR_autotoc_md15}{}\doxysubsection{📜 Remerciements}\label{md_README_FR_autotoc_md15}
+\end{DoxyItemize}\hypertarget{md_README_FR_autotoc_md17}{}\doxysubsection{📄 Licence}\label{md_README_FR_autotoc_md17}
+Ce logiciel est sous \href{https://unlicense.org/}{\texttt{ Unlicense}}, dont les termes sont disponibles dans \href{UNLICENSE.txt}{\texttt{ UNLICENSE.\+txt}}.\hypertarget{md_README_FR_autotoc_md18}{}\doxysubsection{📜 Remerciements}\label{md_README_FR_autotoc_md18}
 Nous remercions tout particulièrement notre professeur de conception agile de projets informatiques, monsieur Valentin Lachand-\/\+Pascal. 
