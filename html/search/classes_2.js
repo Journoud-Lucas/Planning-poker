@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['planningpoker_7',['PlanningPoker',['../classPlanningPoker.html',1,'']]]
+  ['planningpoker_9',['PlanningPoker',['../classPlanningPoker.html',1,'']]]
 ];
