@@ -1,0 +1,46 @@
+name: Generate Doxygen Documentation
+
+on:
+  push:
+    branches:
+      - main  # ou 'master' selon le nom de ta branche
+  pull_request:
+    branches:
+      - main  # ou 'master' selon le nom de ta branche
+
+jobs:
+  doxygen:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Étape 1 : Récupérer le code
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Étape 2 : Installer Doxygen
+      - name: Set up Doxygen
+        run: sudo apt-get install doxygen
+
+      # Étape 3 : Générer la documentation avec Doxygen
+      - name: Generate Doxygen documentation
+        run: doxygen Doxyfile  # Assure-toi que ton fichier Doxyfile est à la racine du dépôt
+
+      # Étape 4 : Configurer SSH pour déployer la documentation
+      - name: Set up SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.DEPLOY_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan github.com >> ~/.ssh/known_hosts
+
+      # Étape 5 : Déployer la documentation sur GitHub Pages
+      - name: Upload documentation to GitHub Pages
+        if: success()
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          deploy_key: ${{ secrets.DEPLOY_KEY }}
+          publish_dir: ./html  # Le répertoire où Doxygen génère la documentation (par défaut 'html')
+
+      # Étape 6 : Nettoyage
+      - name: Clean up
+        run: rm -rf ./html  # Si tu veux nettoyer après le déploiement, sinon supprime cette étape
