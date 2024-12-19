@@ -72,29 +72,27 @@ $(function() {
 <div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#pragma once</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160; </div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &lt;QDialog&gt;</span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;QLabel&gt;</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;QComboBox&gt;</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;QPushButton&gt;</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;QVBoxLayout&gt;</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
-<div class="line"><a name="l00009"></a><span class="lineno"><a class="line" href="classEstimationDialog.html">    9</a></span>&#160;<span class="keyword">class </span><a class="code" href="classEstimationDialog.html">EstimationDialog</a> : <span class="keyword">public</span> QDialog</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;{</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;    Q_OBJECT</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    <a class="code" href="classEstimationDialog.html#a5aa22bea818bc333d027d47274f6eeac">EstimationDialog</a>(<span class="keyword">const</span> QString&amp; sTaskDescription_in, <span class="keywordtype">int</span> nRound_in, <span class="keywordtype">int</span> nPlayerNumber_in, <span class="keyword">const</span> QVector&lt;int&gt;&amp; nVecVoteNumber_in, QWidget* pWidgetParent_in = <span class="keyword">nullptr</span>);</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    <span class="keywordtype">int</span> <a class="code" href="classEstimationDialog.html#a20a7e6fbd75d125dbc9828ea8a1ad5a7">GetSelectedEstimate</a>(<span class="keywordtype">void</span>) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <span class="keywordtype">int</span> nSelectedEstimate;</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    QLabel* pLabelTask;</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    QLabel* pLabelRound;</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    QLabel* pLabelPlayer;</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    QComboBox* pComboBoxEstimate;</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;};</div>
-<div class="ttc" id="aclassEstimationDialog_html"><div class="ttname"><a href="classEstimationDialog.html">EstimationDialog</a></div><div class="ttdef"><b>Definition:</b> EstimationDialog.h:10</div></div>
-<div class="ttc" id="aclassEstimationDialog_html_a20a7e6fbd75d125dbc9828ea8a1ad5a7"><div class="ttname"><a href="classEstimationDialog.html#a20a7e6fbd75d125dbc9828ea8a1ad5a7">EstimationDialog::GetSelectedEstimate</a></div><div class="ttdeci">int GetSelectedEstimate(void) const</div><div class="ttdoc">Return the selected estimate by the player</div><div class="ttdef"><b>Definition:</b> EstimationDialog.cpp:47</div></div>
-<div class="ttc" id="aclassEstimationDialog_html_a5aa22bea818bc333d027d47274f6eeac"><div class="ttname"><a href="classEstimationDialog.html#a5aa22bea818bc333d027d47274f6eeac">EstimationDialog::EstimationDialog</a></div><div class="ttdeci">EstimationDialog(const QString &amp;sTaskDescription_in, int nRound_in, int nPlayerNumber_in, const QVector&lt; int &gt; &amp;nVecVoteNumber_in, QWidget *pWidgetParent_in=nullptr)</div><div class="ttdoc">Create dialog for selecting the estimate by the player</div><div class="ttdef"><b>Definition:</b> EstimationDialog.cpp:11</div></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;QPushButton&gt;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="keyword">const</span> <span class="keywordtype">int</span> COFFEE_CARD_VALUE = -1;</div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
+<div class="line"><a name="l00008"></a><span class="lineno"><a class="line" href="classEstimationDialog.html">    8</a></span>&#160;<span class="keyword">class </span><a class="code" href="classEstimationDialog.html">EstimationDialog</a> : <span class="keyword">public</span> QDialog</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;{</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;    Q_OBJECT</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; </div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    <a class="code" href="classEstimationDialog.html#a2008995456e620d79f20224cc638ba49">EstimationDialog</a>(<span class="keyword">const</span> QString&amp; sTaskDescription_in, <span class="keywordtype">int</span> nRound_in, <span class="keyword">const</span> QString&amp; sPlayerName_in, <span class="keyword">const</span> QVector&lt;int&gt;&amp; nVecVoteNumber_in, QWidget* pWidgetParent_in = <span class="keyword">nullptr</span>);</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    <span class="keywordtype">int</span> <a class="code" href="classEstimationDialog.html#a20a7e6fbd75d125dbc9828ea8a1ad5a7">GetSelectedEstimate</a>(<span class="keywordtype">void</span>) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="keyword">private</span> slots:</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    <span class="keywordtype">void</span> SelectEstimate(<span class="keywordtype">int</span> nEstimate_in);</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <span class="keywordtype">int</span> m_nSelectedEstimate;</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;};</div>
+<div class="ttc" id="aclassEstimationDialog_html"><div class="ttname"><a href="classEstimationDialog.html">EstimationDialog</a></div><div class="ttdef"><b>Definition:</b> EstimationDialog.h:9</div></div>
+<div class="ttc" id="aclassEstimationDialog_html_a2008995456e620d79f20224cc638ba49"><div class="ttname"><a href="classEstimationDialog.html#a2008995456e620d79f20224cc638ba49">EstimationDialog::EstimationDialog</a></div><div class="ttdeci">EstimationDialog(const QString &amp;sTaskDescription_in, int nRound_in, const QString &amp;sPlayerName_in, const QVector&lt; int &gt; &amp;nVecVoteNumber_in, QWidget *pWidgetParent_in=nullptr)</div><div class="ttdoc">Create dialog for selecting the estimate by the player</div><div class="ttdef"><b>Definition:</b> EstimationDialog.cpp:17</div></div>
+<div class="ttc" id="aclassEstimationDialog_html_a20a7e6fbd75d125dbc9828ea8a1ad5a7"><div class="ttname"><a href="classEstimationDialog.html#a20a7e6fbd75d125dbc9828ea8a1ad5a7">EstimationDialog::GetSelectedEstimate</a></div><div class="ttdeci">int GetSelectedEstimate(void) const</div><div class="ttdoc">Return the selected estimate by the player</div><div class="ttdef"><b>Definition:</b> EstimationDialog.cpp:73</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
