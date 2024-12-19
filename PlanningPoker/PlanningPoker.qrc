@@ -1,0 +1,16 @@
+   <RCC>
+       <qresource prefix="/">
+           <file>img/cards/0.svg</file>
+           <file>img/cards/1.svg</file>
+           <file>img/cards/2.svg</file>
+           <file>img/cards/3.svg</file>
+           <file>img/cards/5.svg</file>
+           <file>img/cards/8.svg</file>
+           <file>img/cards/13.svg</file>
+           <file>img/cards/20.svg</file>
+           <file>img/cards/40.svg</file>
+           <file>img/cards/100.svg</file>
+           <file>img/cards/cafe.svg</file>
+           <!-- Continuez à ajouter tous les fichiers nécessaires -->
+       </qresource>
+   </RCC>
