@@ -26,6 +26,37 @@ En effet, nommé sous le nom de code projet CAPI, nous devions faire dans le lan
 4. **Estimation des tâches :** Les joueurs font leur estimation tour a tour pour chaque tâches. Ils peuvent utiliser a tout moment la carte café pour mettre en pause le programme.
 5. **Fin de la session :** Lorsqu'un concensus est atteint, la moyenne (ou autre dépendamment du mode choisi) est enregistré dans le JSON. Quand l'estimation a eu lieu pour chaque tâche, le JSON est terminé.
 
+## 🛠️ Configuration de l'Environnement de Compilation
+
+Pour compiler et exécuter l'application Planning Poker sur votre ordinateur, vous aurez besoin de certains outils et bibliothèques. Voici un guide pour vous aider à configurer votre environnement de développement :
+
+### Prérequis
+
+1. **Système d'exploitation requis :**
+   - Windows
+   - Le programme devrait fonctionner sous MAC et Linux, mais aucun test n'as été effectué dessus.
+
+2. **Qt Framework :**
+   - L'application utilise le framework Qt pour l'interface utilisateur. Vous devez installer Qt version 6.7.3. Vous pouvez le télécharger depuis [qt.io](https://www.qt.io/download).
+
+3. **Compilateur C++ :**
+   - Assurez-vous d'avoir un compilateur compatible avec C++17.
+     J'ai utilisé MSVC 2022 v6.7.3 64bit, séléctionnés lors de l'installation de Qt.
+
+4. **Modules Qt :**
+   - Seuls les modules QT Core, QT GUI et QT Widgets qui sont dans l'installation de base de Qt ont été utilisés.
+
+5. **Visual Studio :**
+   - Afin d'utiliser Qt sous Visual Studio, vous devez installer l'extension Qt Visual Studio Tools, puis dans les paramètres de l'extension, allez dans `Versions` et ajoutez le chemin vers votre version de Qt. Exemple: `C:\Qt\6.7.3\msvc2022_64`
+
+### Instructions de Compilation
+1. **Compiler le projet :**
+   - Sur **Windows** avec Visual Studio :
+     Ouvrez le fichier `.sln` généré dans Visual Studio et construisez la solution.
+
+2. **Exécuter l'application :**
+   Une fois la compilation réussie, vous pouvez exécuter l'application.
+
 ## 🔢 Versionnage
 
 Ce projet suit un schéma de [versionnement sémantique](https://semver.org/).
