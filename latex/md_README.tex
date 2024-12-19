@@ -18,12 +18,45 @@ This is a small project made for \href{https://www.univ-lyon2.fr/}{\texttt{ Univ
 \item {\bfseries{Start Sessions\+:}} Launch a session and enter the participants.
 \item {\bfseries{Task Estimation\+:}} Players estimate tasks one by one. They can use the coffee card at any time to pause the program.
 \item {\bfseries{End the Session\+:}} When consensus is reached, the average (or other depending on the chosen mode) is recorded in the JSON. Once all tasks are estimated, the JSON is finalized.
-\end{DoxyEnumerate}\hypertarget{md_README_autotoc_md4}{}\doxysubsection{🔢 Versioning}\label{md_README_autotoc_md4}
-This project follows a \href{https://semver.org/}{\texttt{ semantic versioning}} scheme.\hypertarget{md_README_autotoc_md5}{}\doxysubsection{🤝 Credits}\label{md_README_autotoc_md5}
+\end{DoxyEnumerate}\hypertarget{md_README_autotoc_md4}{}\doxysubsection{🛠️ Compilation Environment Setup}\label{md_README_autotoc_md4}
+To compile and run the Planning Poker application on your computer, you will need certain tools and libraries. Here\textquotesingle{}s a guide to help you set up your development environment\+:\hypertarget{md_README_autotoc_md5}{}\doxysubsubsection{Prerequisites}\label{md_README_autotoc_md5}
+
+\begin{DoxyEnumerate}
+\item {\bfseries{Required Operating System\+:}}
+\begin{DoxyItemize}
+\item Windows
+\item The program should work on Mac and Linux, but it has not been tested on these platforms.
+\end{DoxyItemize}
+\item {\bfseries{Qt Framework\+:}}
+\begin{DoxyItemize}
+\item The application uses the Qt framework for the user interface. You need to install Qt version 6.\+7.\+3. You can download it from \href{https://www.qt.io/download}{\texttt{ qt.\+io}}.
+\end{DoxyItemize}
+\item {\bfseries{C++ Compiler\+:}}
+\begin{DoxyItemize}
+\item Make sure you have a compiler compatible with C++17. I used MSVC 2022 v6.\+7.\+3 64-\/bit, selected during the Qt installation.
+\end{DoxyItemize}
+\item {\bfseries{Qt Modules\+:}}
+\begin{DoxyItemize}
+\item Only the core modules {\ttfamily Qt Core}, {\ttfamily Qt GUI}, and {\ttfamily Qt Widgets}, which are part of the base Qt installation, were used.
+\end{DoxyItemize}
+\item {\bfseries{Visual Studio\+:}}
+\begin{DoxyItemize}
+\item To use Qt with Visual Studio, you need to install the {\bfseries{Qt Visual Studio Tools}} extension. Then, in the extension settings, go to {\ttfamily Versions} and add the path to your Qt version. Example\+: {\ttfamily C\+:\textbackslash{}Qt\textbackslash{}6.\+7.\+3\textbackslash{}msvc2022\+\_\+64}
+\end{DoxyItemize}
+\end{DoxyEnumerate}\hypertarget{md_README_autotoc_md6}{}\doxysubsubsection{Compilation Instructions}\label{md_README_autotoc_md6}
+
+\begin{DoxyEnumerate}
+\item {\bfseries{Compile the Project\+:}}
+\begin{DoxyItemize}
+\item On {\bfseries{Windows}} with Visual Studio\+: Open the {\ttfamily .sln} file generated in Visual Studio and build the solution.
+\end{DoxyItemize}
+\item {\bfseries{Run the Application\+:}} Once the compilation is successful, you can run the application.
+\end{DoxyEnumerate}\hypertarget{md_README_autotoc_md7}{}\doxysubsection{🔢 Versioning}\label{md_README_autotoc_md7}
+This project follows a \href{https://semver.org/}{\texttt{ semantic versioning}} scheme.\hypertarget{md_README_autotoc_md8}{}\doxysubsection{🤝 Credits}\label{md_README_autotoc_md8}
 This project was created by\+:
 \begin{DoxyItemize}
 \item BESSAD Tarek
 \item JOURNOUD Lucas
-\end{DoxyItemize}\hypertarget{md_README_autotoc_md6}{}\doxysubsection{📄 License}\label{md_README_autotoc_md6}
-This software is under \href{https://unlicense.org/}{\texttt{ Unlicense}}, with terms available in \href{UNLICENSE.txt}{\texttt{ UNLICENSE.\+txt}}.\hypertarget{md_README_autotoc_md7}{}\doxysubsection{📜 Acknowledgments}\label{md_README_autotoc_md7}
+\end{DoxyItemize}\hypertarget{md_README_autotoc_md9}{}\doxysubsection{📄 License}\label{md_README_autotoc_md9}
+This software is under \href{https://unlicense.org/}{\texttt{ Unlicense}}, with terms available in \href{UNLICENSE.txt}{\texttt{ UNLICENSE.\+txt}}.\hypertarget{md_README_autotoc_md10}{}\doxysubsection{📜 Acknowledgments}\label{md_README_autotoc_md10}
 We especially thank our professor of agile project design, Mr. Valentin Lachand-\/\+Pascal. 

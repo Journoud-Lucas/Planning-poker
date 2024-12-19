@@ -92,18 +92,55 @@ $(function() {
 <li><b>End the Session:</b> When consensus is reached, the average (or other depending on the chosen mode) is recorded in the JSON. Once all tasks are estimated, the JSON is finalized.</li>
 </ol>
 <h2><a class="anchor" id="autotoc_md4"></a>
+🛠️ Compilation Environment Setup</h2>
+<p>To compile and run the Planning Poker application on your computer, you will need certain tools and libraries. Here's a guide to help you set up your development environment:</p>
+<h3><a class="anchor" id="autotoc_md5"></a>
+Prerequisites</h3>
+<ol type="1">
+<li><b>Required Operating System:</b><ul>
+<li>Windows</li>
+<li>The program should work on Mac and Linux, but it has not been tested on these platforms.</li>
+</ul>
+</li>
+<li><b>Qt Framework:</b><ul>
+<li>The application uses the Qt framework for the user interface. You need to install Qt version 6.7.3. You can download it from <a href="https://www.qt.io/download">qt.io</a>.</li>
+</ul>
+</li>
+<li><b>C++ Compiler:</b><ul>
+<li>Make sure you have a compiler compatible with C++17. I used MSVC 2022 v6.7.3 64-bit, selected during the Qt installation.</li>
+</ul>
+</li>
+<li><b>Qt Modules:</b><ul>
+<li>Only the core modules <code>Qt Core</code>, <code>Qt GUI</code>, and <code>Qt Widgets</code>, which are part of the base Qt installation, were used.</li>
+</ul>
+</li>
+<li><b>Visual Studio:</b><ul>
+<li>To use Qt with Visual Studio, you need to install the <b>Qt Visual Studio Tools</b> extension. Then, in the extension settings, go to <code>Versions</code> and add the path to your Qt version. Example: <code>C:\Qt\6.7.3\msvc2022_64</code></li>
+</ul>
+</li>
+</ol>
+<h3><a class="anchor" id="autotoc_md6"></a>
+Compilation Instructions</h3>
+<ol type="1">
+<li><b>Compile the Project:</b><ul>
+<li>On <b>Windows</b> with Visual Studio: Open the <code>.sln</code> file generated in Visual Studio and build the solution.</li>
+</ul>
+</li>
+<li><b>Run the Application:</b> Once the compilation is successful, you can run the application.</li>
+</ol>
+<h2><a class="anchor" id="autotoc_md7"></a>
 🔢 Versioning</h2>
 <p>This project follows a <a href="https://semver.org/">semantic versioning</a> scheme.</p>
-<h2><a class="anchor" id="autotoc_md5"></a>
+<h2><a class="anchor" id="autotoc_md8"></a>
 🤝 Credits</h2>
 <p>This project was created by:</p><ul>
 <li>BESSAD Tarek</li>
 <li>JOURNOUD Lucas</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md6"></a>
+<h2><a class="anchor" id="autotoc_md9"></a>
 📄 License</h2>
 <p>This software is under <a href="https://unlicense.org/">Unlicense</a>, with terms available in <a href="UNLICENSE.txt">UNLICENSE.txt</a>.</p>
-<h2><a class="anchor" id="autotoc_md7"></a>
+<h2><a class="anchor" id="autotoc_md10"></a>
 📜 Acknowledgments</h2>
 <p>We especially thank our professor of agile project design, Mr. Valentin Lachand-Pascal. </p>
 </div></div><!-- contents -->
