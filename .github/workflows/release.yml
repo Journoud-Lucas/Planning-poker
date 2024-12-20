@@ -40,10 +40,10 @@ jobs:
 
     # Build with MSBuild
     - name: Build with MSBuild
-      shell: cmd
-      run: |
-        call "%ProgramFiles(x86)%\Microsoft Visual Studio\2019\BuildTools\VC\Auxiliary\Build\vcvars64.bat" && ^
-        msbuild D:\a\Planning-poker\Planning-poker\PlanningPoker.sln /p:Configuration=Release /p:Platform=x64
+    shell: cmd
+    run: |
+        for /f "tokens=*" %%i in ('"C:\Program Files (x86)\Microsoft Visual Studio\Installer\vswhere.exe" -products * -requires Microsoft.VisualStudio.Component.VC.Tools.x86.x64 -property installationPath -latest') do set InstallDir=%%i
+        call "%InstallDir%\VC\Auxiliary\Build\vcvars64.bat" && msbuild D:\a\Planning-poker\Planning-poker\PlanningPoker.sln /p:Configuration=Release /p:Platform=x64
 
     # Archive release files
     - name: Archive release files
