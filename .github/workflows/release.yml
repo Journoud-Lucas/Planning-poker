@@ -23,14 +23,15 @@ jobs:
         target: desktop
         arch: win64_msvc2019_64
 
-    # 3. Installer Visual Studio Build Tools (si non déjà présent)
-    - name: Setup MSVC
-      uses: actions/setup-msbuild@v1
+    # 3. Installer MSBuild
+    - name: Setup MSBuild
+      uses: microsoft/setup-msbuild@v1
 
     # 4. Nettoyage des anciens builds
     - name: Clean Previous Builds
       run: |
         if exist x64\Release rmdir /s /q x64\Release
+        if exist x64\Debug rmdir /s /q x64\Debug
 
     # 5. Compilation du projet en mode Release
     - name: Build Project (Release)
