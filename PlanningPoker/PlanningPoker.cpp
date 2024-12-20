@@ -5,6 +5,7 @@
 #include <QJsonObject>
 #include <QInputDialog>
 #include <QMessageBox>
+#include <QApplication>
 
 #include "PlanningPoker.h"
 #include "EstimationDialog.h"
@@ -17,6 +18,7 @@
 PlanningPoker::PlanningPoker(QWidget* pWidgetParent_in)
     : QMainWindow(pWidgetParent_in), m_sJsonFileName(""), m_jsonArrayTasks(QJsonArray())
 {
+    qApp->setWindowIcon(QIcon(":/img/ico/home.ico"));
     QWidget* pWidgetCentral = new QWidget(this);
     QVBoxLayout* pVBoxLayoutMain = new QVBoxLayout(pWidgetCentral);
 
