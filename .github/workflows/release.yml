@@ -31,6 +31,7 @@ jobs:
     - name: Install Visual Studio Build Tools
       uses: microsoft/setup-msbuild@v1
       with:
+        vs-version: 2019
         msbuild-architecture: x64
 
     # Set up Qt environment
@@ -40,8 +41,10 @@ jobs:
 
     # Build with MSBuild
     - name: Build with MSBuild
+      shell: cmd
       run: |
-        cmd.exe /c "call \"%ProgramFiles(x86)%\\Microsoft Visual Studio\\2019\\BuildTools\\VC\\Auxiliary\\Build\\vcvars64.bat\" && msbuild D:\\a\\Planning-poker\\Planning-poker\\PlanningPoker.sln /p:Configuration=Release /p:Platform=x64"
+        call "%ProgramFiles(x86)%\Microsoft Visual Studio\2019\BuildTools\VC\Auxiliary\Build\vcvars64.bat" && ^
+        msbuild D:\a\Planning-poker\Planning-poker\PlanningPoker.sln /p:Configuration=Release /p:Platform=x64
 
     # Archive release files
     - name: Archive release files
