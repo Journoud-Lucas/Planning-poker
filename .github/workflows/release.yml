@@ -31,7 +31,8 @@ jobs:
     - name: Install Visual Studio Build Tools
       uses: microsoft/setup-msbuild@v1
       with:
-        vs-version: '2019'
+        vs-version: 2019
+        msbuild-architecture: x64
 
     # Set up Qt environment
     - name: Set up Qt environment
