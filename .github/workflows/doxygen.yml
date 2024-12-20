@@ -39,8 +39,8 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3
         with:
           deploy_key: ${{ secrets.DEPLOY_KEY }}
-          publish_dir: ./html
+          publish_dir: ./html/html
 
       # Étape 6 : Nettoyage
       - name: Clean up
-        run: rm -rf ./html
+        run: rm -rf ./html/html
