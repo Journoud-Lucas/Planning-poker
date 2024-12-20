@@ -16,17 +16,23 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
 
+    # Verify contents before copying
+    - name: List contents of tools directory
+      run: |
+        Get-ChildItem -Path .\tools\QtMsBuild -Recurse
+
     # Copy QtMsBuild using PowerShell
     - name: Copy QtMsBuild to expected directory
+      shell: powershell
       run: |
-        # Assurer que tous les fichiers nécessaires sont copiés dans le bon répertoire dans l'environnement CI/CD.
+        # Making sure the directory exists and copying the necessary files
         md ${{ github.workspace }}\Planning-poker\PlanningPoker\QtMsBuild
         Copy-Item -Path .\tools\QtMsBuild\* -Destination ${{ github.workspace }}\Planning-poker\PlanningPoker\QtMsBuild\ -Recurse -Force
 
-    # Set QtMsBuild environment variable
-    - name: Set QtMsBuild environment variable
+    # Verify the contents after copying
+    - name: List contents of destination directory
       run: |
-        echo "QTMSBUILD=C:\\QtMsBuild" >> $GITHUB_ENV
+        Get-ChildItem -Path ${{ github.workspace }}\Planning-poker\PlanningPoker\QtMsBuild -Recurse
 
     # Install Visual Studio Build Tools
     - name: Install Visual Studio Build Tools
