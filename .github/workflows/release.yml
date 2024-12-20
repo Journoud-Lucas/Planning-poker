@@ -25,8 +25,9 @@ jobs:
         $env:Qt6_DIR="D:\a\Planning-poker\Qt\6.7.3\msvc2019_64"
         $env:QT_PLUGIN_PATH="D:\a\Planning-poker\Qt\6.7.3\msvc2019_64\plugins"
         $env:QML2_IMPORT_PATH="D:\a\Planning-poker\Qt\6.7.3\msvc2019_64\qml"
-        # Initialiser l'environnement de Visual Studio
-        cmd.exe /c '"%ProgramFiles(x86)%\Microsoft Visual Studio\2019\BuildTools\VC\Auxiliary\Build\vcvars64.bat"'
+        # Initialiser l'environnement de Visual Studio# Initialiser l'environnement de Visual Studio
+        cmd.exe /c "%ProgramFiles(x86)%\Microsoft Visual Studio\2019\BuildTools\VC\Auxiliary\Build\vcvars64.bat"
+
 
 
 
