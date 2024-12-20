@@ -1,4 +1,4 @@
-name: Build and Release
+name: Build and Deploy
 
 on:
   push:
@@ -8,47 +8,30 @@ on:
 jobs:
   build:
     runs-on: windows-latest
-    
+
     steps:
+    # Vérifier le code source
     - name: Checkout code
       uses: actions/checkout@v3
 
+    # Définir les variables d'environnement pour MSBuild et Qt
     - name: Set up Qt environment
-      run: |
-        # Copier QtMsBuild dans le répertoire C:\QtMsBuild
-        mkdir -p C:\QtMsBuild
-        Copy-Item -Path .\tools\QtMsBuild\* -Destination C:\QtMsBuild\ -Recurse -Force
-
-    - name: Set up MSBuild environment
       run: |
         # Définir les variables d'environnement pour MSBuild et Qt
         $env:Qt6_DIR="D:\a\Planning-poker\Qt\6.7.3\msvc2019_64"
         $env:QT_PLUGIN_PATH="D:\a\Planning-poker\Qt\6.7.3\msvc2019_64\plugins"
         $env:QML2_IMPORT_PATH="D:\a\Planning-poker\Qt\6.7.3\msvc2019_64\qml"
-        # Initialiser l'environnement de Visual Studio# Initialiser l'environnement de Visual Studio
-        cmd.exe /c "%ProgramFiles(x86)%\Microsoft Visual Studio\2019\BuildTools\VC\Auxiliary\Build\vcvars64.bat"
+        
+        # Initialiser l'environnement de Visual Studio avec des guillemets échappés
+        cmd.exe /c '"C:\Program Files (x86)\Microsoft Visual Studio\2019\BuildTools\VC\Auxiliary\Build\vcvars64.bat"'
 
+    # Vérification des prérequis et installation des dépendances Python
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
 
-
-
-    - name: Build the project
+    # Compiler avec MSBuild
+    - name: Build with MSBuild
       run: |
         msbuild D:\a\Planning-poker\Planning-poker\PlanningPoker.sln /p:Configuration=Release /p:Platform=x64
-
-    - name: Run windeployqt to deploy Qt libraries
-      run: |
-        # Chemin vers windeployqt
-        $windeployqtPath = "D:\a\Planning-poker\Qt\6.7.3\msvc2019_64\bin\windeployqt.exe"
-        # Exécuter windeployqt sur l'exécutable généré
-        & $windeployqtPath D:\a\Planning-poker\build\Release\PlanningPoker.exe
-
-    - name: Create Release ZIP
-      run: |
-        # Créer un fichier zip contenant la version Release
-        Compress-Archive -Path D:\a\Planning-poker\build\Release\* -DestinationPath D:\a\Planning-poker\release.zip
-
-    - name: Upload Release ZIP
-      uses: actions/upload-artifact@v3
-      with:
-        name: release
-        path: D:\a\Planning-poker\release.zip
