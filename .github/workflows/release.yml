@@ -1,50 +1,51 @@
-name: Build Qt Project
+name: Build and Release
 
 on:
   push:
-    branches:
-      - main
-  pull_request:
     branches:
       - main
 
 jobs:
   build:
     runs-on: windows-latest
-
+    
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
-
-    # Copie de QtMsBuild à partir d'un dossier spécifique dans votre repository (si vous l'avez ajouté)
-    - name: Copy QtMsBuild to build directory
-      run: |
-        mkdir -p C:\QtMsBuild
-        copy /Y .\tools\QtMsBuild\* C:\QtMsBuild\
-
-    # Set QtMsBuild environment variable
-    - name: Set QtMsBuild environment variable
-      run: |
-        echo "QTMSBUILD=C:\\QtMsBuild" >> $GITHUB_ENV
-
-    # Installer les dépendances (si nécessaire, comme Visual Studio Build Tools)
-    - name: Install Visual Studio Build Tools
-      uses: microsoft/setup-msbuild@v1
-      with:
-        vs-version: '2019'
+    - name: Checkout code
+      uses: actions/checkout@v3
 
     - name: Set up Qt environment
       run: |
-        echo "QT6_DIR=D:\\a\\Planning-poker\\Qt\\6.7.3\\msvc2019_64" >> $GITHUB_ENV
+        # Copier QtMsBuild dans le répertoire C:\QtMsBuild
+        mkdir -p C:\QtMsBuild
+        Copy-Item -Path .\tools\QtMsBuild\* -Destination C:\QtMsBuild\ -Recurse -Force
 
-    # Compilation avec MSBuild
-    - name: Build with MSBuild
+    - name: Set up MSBuild environment
       run: |
-        cmd.exe /c "call \"%ProgramFiles(x86)%\\Microsoft Visual Studio\\2019\\BuildTools\\VC\\Auxiliary\\Build\\vcvars64.bat\" && msbuild D:\\a\\Planning-poker\\Planning-poker\\PlanningPoker.sln /p:Configuration=Release /p:Platform=x64"
+        # Définir les variables d'environnement pour MSBuild et Qt
+        $env:Qt6_DIR="D:\a\Planning-poker\Qt\6.7.3\msvc2019_64"
+        $env:QT_PLUGIN_PATH="D:\a\Planning-poker\Qt\6.7.3\msvc2019_64\plugins"
+        $env:QML2_IMPORT_PATH="D:\a\Planning-poker\Qt\6.7.3\msvc2019_64\qml"
+        # Initialiser l'environnement de Visual Studio
+        cmd.exe /c "%ProgramFiles(x86)%\Microsoft Visual Studio\2019\BuildTools\VC\Auxiliary\Build\vcvars64.bat"
 
-    # Archiver les fichiers de build (si nécessaire)
-    - name: Archive release files
+    - name: Build the project
+      run: |
+        msbuild D:\a\Planning-poker\Planning-poker\PlanningPoker.sln /p:Configuration=Release /p:Platform=x64
+
+    - name: Run windeployqt to deploy Qt libraries
+      run: |
+        # Chemin vers windeployqt
+        $windeployqtPath = "D:\a\Planning-poker\Qt\6.7.3\msvc2019_64\bin\windeployqt.exe"
+        # Exécuter windeployqt sur l'exécutable généré
+        & $windeployqtPath D:\a\Planning-poker\build\Release\PlanningPoker.exe
+
+    - name: Create Release ZIP
+      run: |
+        # Créer un fichier zip contenant la version Release
+        Compress-Archive -Path D:\a\Planning-poker\build\Release\* -DestinationPath D:\a\Planning-poker\release.zip
+
+    - name: Upload Release ZIP
       uses: actions/upload-artifact@v3
       with:
-        name: planning-poker-release
-        path: D:\a\Planning-poker\build\Release
+        name: release
+        path: D:\a\Planning-poker\release.zip
