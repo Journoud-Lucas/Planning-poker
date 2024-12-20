@@ -13,12 +13,15 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      # Install Qt (use an installer or download Qt from a reliable source)
-      - name: Install Qt
+      # Set up Qt environment variables for Qt 6.7.3
+      - name: Set up Qt 6.7.3 environment variables
         run: |
-          choco install qt5 --version=5.15.2
+          echo "##vso[task.setvariable variable=QTDIR]D:\a\Planning-poker\Qt\6.7.3\msvc2019_64"
+          echo "##vso[task.setvariable variable=QT_PLUGIN_PATH]D:\a\Planning-poker\Qt\6.7.3\msvc2019_64\plugins"
+          echo "##vso[task.setvariable variable=QML2_IMPORT_PATH]D:\a\Planning-poker\Qt\6.7.3\msvc2019_64\qml"
+          echo "##vso[task.setvariable variable=PATH]D:\a\Planning-poker\Qt\6.7.3\msvc2019_64\bin;$env:PATH"
 
-      # Set up Visual Studio Build Tools
+      # Install Visual Studio Build Tools
       - name: Set up MSBuild and Visual Studio
         run: |
           echo "Setting up Visual Studio and MSBuild"
@@ -26,15 +29,6 @@ jobs:
           if (Test-Path $vs_installer_path) {
             & $vs_installer_path --path-to-vs C:\Program Files (x86)\Microsoft Visual Studio\2019\BuildTools --add Microsoft.VisualStudio.Workload.VCTools
           }
-
-      # Set up Qt environment variables
-      - name: Set up Qt environment variables
-        run: |
-          echo "Setting up Qt environment variables"
-          echo "##vso[task.setvariable variable=QTDIR]C:\Qt\5.15.2\msvc2019_64"
-          echo "##vso[task.setvariable variable=QT_PLUGIN_PATH]C:\Qt\5.15.2\msvc2019_64\plugins"
-          echo "##vso[task.setvariable variable=QML2_IMPORT_PATH]C:\Qt\5.15.2\msvc2019_64\qml"
-          echo "##vso[task.setvariable variable=PATH]C:\Qt\5.15.2\msvc2019_64\bin;$env:PATH"
 
       # Restore dependencies (if you use NuGet, etc.)
       - name: Restore dependencies
