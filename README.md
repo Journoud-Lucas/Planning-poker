@@ -58,7 +58,7 @@ To compile and run the Planning Poker application on your computer, you will nee
    Once the compilation is successful, you can run the application.
 
 ## 📚 Documentation
-For detailed documentation about the project, visit the [Planning Poker Documentation](https://journoud-lucas.github.io/Planning-poker/html/index.html).
+For detailed documentation about the project, visit the [Planning Poker Documentation](https://journoud-lucas.github.io/Planning-poker).
 
 ## 🔢 Versioning
 
