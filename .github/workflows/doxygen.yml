@@ -3,10 +3,10 @@ name: Generate Doxygen Documentation
 on:
   push:
     branches:
-      - main  # ou 'master' selon le nom de ta branche
+      - main
   pull_request:
     branches:
-      - main  # ou 'master' selon le nom de ta branche
+      - main
 
 jobs:
   doxygen:
@@ -23,7 +23,7 @@ jobs:
 
       # Étape 3 : Générer la documentation avec Doxygen
       - name: Generate Doxygen documentation
-        run: doxygen Doxyfile  # Assure-toi que ton fichier Doxyfile est à la racine du dépôt
+        run: doxygen Doxyfile
 
       # Étape 4 : Configurer SSH pour déployer la documentation
       - name: Set up SSH
@@ -39,8 +39,8 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3
         with:
           deploy_key: ${{ secrets.DEPLOY_KEY }}
-          publish_dir: ./html  # Le répertoire où Doxygen génère la documentation (par défaut 'html')
+          publish_dir: ./html
 
       # Étape 6 : Nettoyage
       - name: Clean up
-        run: rm -rf ./html  # Si tu veux nettoyer après le déploiement, sinon supprime cette étape
+        run: rm -rf ./html
