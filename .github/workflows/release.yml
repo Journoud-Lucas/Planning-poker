@@ -16,33 +16,34 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
 
-    # Copie de QtMsBuild à partir d'un dossier spécifique dans votre repository (si vous l'avez ajouté)
+    # Copy QtMsBuild using PowerShell
     - name: Copy QtMsBuild to build directory
       run: |
-        mkdir -p C:\QtMsBuild
-        copy /Y .\tools\QtMsBuild\* C:\QtMsBuild\
+        mkdir C:\QtMsBuild
+        Copy-Item -Path .\tools\QtMsBuild\* -Destination C:\QtMsBuild\ -Recurse -Force
 
     # Set QtMsBuild environment variable
     - name: Set QtMsBuild environment variable
       run: |
         echo "QTMSBUILD=C:\\QtMsBuild" >> $GITHUB_ENV
 
-    # Installer les dépendances (si nécessaire, comme Visual Studio Build Tools)
+    # Install Visual Studio Build Tools
     - name: Install Visual Studio Build Tools
       uses: microsoft/setup-msbuild@v1
       with:
         vs-version: '2019'
 
+    # Set up Qt environment
     - name: Set up Qt environment
       run: |
         echo "QT6_DIR=D:\\a\\Planning-poker\\Qt\\6.7.3\\msvc2019_64" >> $GITHUB_ENV
 
-    # Compilation avec MSBuild
+    # Build with MSBuild
     - name: Build with MSBuild
       run: |
         cmd.exe /c "call \"%ProgramFiles(x86)%\\Microsoft Visual Studio\\2019\\BuildTools\\VC\\Auxiliary\\Build\\vcvars64.bat\" && msbuild D:\\a\\Planning-poker\\Planning-poker\\PlanningPoker.sln /p:Configuration=Release /p:Platform=x64"
 
-    # Archiver les fichiers de build (si nécessaire)
+    # Archive release files
     - name: Archive release files
       uses: actions/upload-artifact@v3
       with:
