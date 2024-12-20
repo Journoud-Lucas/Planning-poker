@@ -17,10 +17,11 @@ jobs:
       uses: actions/checkout@v2
 
     # Copy QtMsBuild using PowerShell
-    - name: Copy QtMsBuild to build directory
+    - name: Copy QtMsBuild to expected directory
       run: |
-        mkdir C:\QtMsBuild
-        Copy-Item -Path .\tools\QtMsBuild\* -Destination C:\QtMsBuild\ -Recurse -Force
+        # Assurer que tous les fichiers nécessaires sont copiés dans le bon répertoire dans l'environnement CI/CD.
+        md ${{ github.workspace }}\Planning-poker\PlanningPoker\QtMsBuild
+        Copy-Item -Path .\tools\QtMsBuild\* -Destination ${{ github.workspace }}\Planning-poker\PlanningPoker\QtMsBuild\ -Recurse -Force
 
     # Set QtMsBuild environment variable
     - name: Set QtMsBuild environment variable
