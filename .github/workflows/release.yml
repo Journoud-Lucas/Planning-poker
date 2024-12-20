@@ -31,6 +31,7 @@ jobs:
     - name: Install Visual Studio Build Tools
       uses: microsoft/setup-msbuild@v1
       with:
+        vs-version: 2019
         msbuild-architecture: x64
 
     # Set up Qt environment
@@ -40,8 +41,8 @@ jobs:
 
     # Build with MSBuild
     - name: Build with MSBuild
-    shell: cmd
-    run: |
+      shell: cmd
+      run: |
         for /f "tokens=*" %%i in ('"C:\Program Files (x86)\Microsoft Visual Studio\Installer\vswhere.exe" -products * -requires Microsoft.VisualStudio.Component.VC.Tools.x86.x64 -property installationPath -latest') do set InstallDir=%%i
         call "%InstallDir%\VC\Auxiliary\Build\vcvars64.bat" && msbuild D:\a\Planning-poker\Planning-poker\PlanningPoker.sln /p:Configuration=Release /p:Platform=x64
 
