@@ -1,63 +1,64 @@
-name: Build and Deploy Qt Application
+name: Build and Deploy Qt Project
 
 on:
   push:
     branches:
-      - main  # Exécute le workflow sur les pushes vers la branche "main".
+      - main
 
 jobs:
   build:
     runs-on: windows-latest
-
     steps:
-    # 1. Checkout du code source
-    - name: Checkout code
-      uses: actions/checkout@v3
+      # Checkout the repository
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-    # 2. Installer Qt
-    - name: Install Qt
-      uses: jurplel/install-qt-action@v3
-      with:
-        version: 6.7.3
-        host: windows
-        target: desktop
-        arch: win64_msvc2019_64
+      # Install Qt (use an installer or download Qt from a reliable source)
+      - name: Install Qt
+        run: |
+          choco install qt5 --version=5.15.2
 
-    # 3. Installer MSBuild
-    - name: Setup MSBuild
-      uses: microsoft/setup-msbuild@v1
+      # Set up Visual Studio Build Tools
+      - name: Set up MSBuild and Visual Studio
+        run: |
+          echo "Setting up Visual Studio and MSBuild"
+          vs_installer_path="C:\Program Files (x86)\Microsoft Visual Studio\Installer\vs_installer.exe"
+          if (Test-Path $vs_installer_path) {
+            & $vs_installer_path --path-to-vs C:\Program Files (x86)\Microsoft Visual Studio\2019\BuildTools --add Microsoft.VisualStudio.Workload.VCTools
+          }
 
-    # 4. Nettoyage du dossier Release uniquement
-    - name: Clean Previous Release Build
-      run: |
-        if (Test-Path "x64\Release") {
-          Remove-Item -Recurse -Force "x64\Release"
-        }
+      # Set up Qt environment variables
+      - name: Set up Qt environment variables
+        run: |
+          echo "Setting up Qt environment variables"
+          echo "##vso[task.setvariable variable=QTDIR]C:\Qt\5.15.2\msvc2019_64"
+          echo "##vso[task.setvariable variable=QT_PLUGIN_PATH]C:\Qt\5.15.2\msvc2019_64\plugins"
+          echo "##vso[task.setvariable variable=QML2_IMPORT_PATH]C:\Qt\5.15.2\msvc2019_64\qml"
+          echo "##vso[task.setvariable variable=PATH]C:\Qt\5.15.2\msvc2019_64\bin;$env:PATH"
 
-    # 5. Compilation du projet en mode Release
-    - name: Build Project (Release)
-      shell: cmd
-      run: |
-        "%ProgramFiles(x86)%\Microsoft Visual Studio\2019\BuildTools\VC\Auxiliary\Build\vcvars64.bat"
-        msbuild D:\a\Planning-poker\Planning-poker\PlanningPoker.sln /p:Configuration=Release /p:Platform=x64
+      # Restore dependencies (if you use NuGet, etc.)
+      - name: Restore dependencies
+        run: |
+          msbuild PlanningPoker.sln /p:Configuration=Release /p:Platform=x64
 
-    # 6. Exécuter windeployqt avec le bon chemin
-    - name: Deploy Application
-      run: |
-        C:\Qt\6.7.3\msvc2022_64\bin\windeployqt.exe x64\Release\PlanningPoker.exe
+      # Build the solution with MSBuild
+      - name: Build the project
+        run: |
+          msbuild PlanningPoker.sln /p:Configuration=Release /p:Platform=x64
 
-    # 7. Créer un fichier ZIP avec les fichiers nécessaires
-    - name: Create ZIP Archive
-      run: |
-        mkdir release
-        copy x64\Release\PlanningPoker.exe release\
-        copy x64\Release\*.dll release\
-        tar -a -c -f release\PlanningPoker-v${{ github.run_number }}.zip release\*
+      # Run windeployqt (if you are building a Qt application with dependencies)
+      - name: Run windeployqt
+        run: |
+          windeployqt .\x64\Release\PlanningPoker.exe
 
-    # 8. Créer une release GitHub avec le fichier ZIP
-    - name: Create Release
-      uses: softprops/action-gh-release@v1
-      with:
-        files: release\PlanningPoker-v${{ github.run_number }}.zip
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # Create a release artifact (for uploading or further use)
+      - name: Create ZIP of release
+        run: |
+          powershell Compress-Archive -Path .\x64\Release -DestinationPath ./release.zip
+
+      # Upload the release artifact
+      - name: Upload Release ZIP
+        uses: actions/upload-artifact@v2
+        with:
+          name: planning-poker-release
+          path: release.zip
