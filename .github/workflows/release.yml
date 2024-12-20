@@ -38,7 +38,7 @@ jobs:
     - name: Build Project (Release)
       run: |
         cmd.exe /c "%ProgramFiles(x86)%\Microsoft Visual Studio\2019\BuildTools\VC\Auxiliary\Build\vcvars64.bat"
-        msbuild PlanningPoker.sln /p:Configuration=Release /p:Platform=x64
+        msbuild D:\a\Planning-poker\Planning-poker\PlanningPoker.sln /p:Configuration=Release /p:Platform=x64
 
     # 6. Exécuter windeployqt avec le bon chemin
     - name: Deploy Application
