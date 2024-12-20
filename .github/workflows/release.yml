@@ -16,16 +16,49 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
 
+    # List contents of tools directory for verification
+    - name: List contents of tools directory
+      run: |
+        Get-ChildItem -Path .\tools\QtMsBuild -Recurse
+
+    # Copy QtMsBuild to expected directory
+    - name: Copy QtMsBuild to expected directory
+      shell: powershell
+      run: |
+        md ${{ github.workspace }}\Planning-poker\PlanningPoker\QtMsBuild
+        Copy-Item -Path .\tools\QtMsBuild\* -Destination ${{ github.workspace }}\Planning-poker\PlanningPoker\QtMsBuild\ -Recurse -Force
+
+    # Verify the contents after copying
+    - name: List contents of destination directory
+      run: |
+        Get-ChildItem -Path ${{ github.workspace }}\Planning-poker\PlanningPoker\QtMsBuild -Recurse
+
+    # Install Chocolatey
+    - name: Install Chocolatey
+      run: |
+        Set-ExecutionPolicy Bypass -Scope Process -Force; `
+        [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; `
+        iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
+
+    # Install Qt using Chocolatey
+    - name: Install Qt
+      run: choco install qt --version=6.7.3 --pre --confirm
+
+    # Set up Qt environment
+    - name: Set up Qt environment
+      run: |
+        echo "QT6_DIR=C:\\Qt\\6.7.3\\msvc2019_64" >> $GITHUB_ENV
+
+    # Verify Qt installation
+    - name: List Qt directory
+      run: |
+        dir C:\Qt\*
+
     # Install Visual Studio Build Tools
     - name: Install Visual Studio Build Tools
       uses: microsoft/setup-msbuild@v1
       with:
         msbuild-architecture: x64
-
-    # Set up Qt environment
-    - name: Set up Qt environment
-      run: |
-        echo "QT6_DIR=D:\\a\\Planning-poker\\Qt\\6.7.3\\msvc2019_64" >> $GITHUB_ENV
 
     # Build with MSBuild
     - name: Build with MSBuild
