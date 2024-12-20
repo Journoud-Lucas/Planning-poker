@@ -1,0 +1,60 @@
+name: Build and Deploy Qt Application
+
+on:
+  push:
+    branches:
+      - main  # Exécute le workflow sur les pushes vers la branche "main".
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    # 1. Checkout du code source
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    # 2. Installer Qt
+    - name: Install Qt
+      uses: jurplel/install-qt-action@v3
+      with:
+        version: 6.7.3
+        host: windows
+        target: desktop
+        arch: win64_msvc2019_64
+
+    # 3. Installer Visual Studio Build Tools (si non déjà présent)
+    - name: Setup MSVC
+      uses: actions/setup-msbuild@v1
+
+    # 4. Nettoyage des anciens builds
+    - name: Clean Previous Builds
+      run: |
+        if exist x64\Release rmdir /s /q x64\Release
+
+    # 5. Compilation du projet en mode Release
+    - name: Build Project (Release)
+      run: |
+        call "%ProgramFiles(x86)%\Microsoft Visual Studio\2019\BuildTools\VC\Auxiliary\Build\vcvars64.bat"
+        msbuild PlanningPoker.sln /p:Configuration=Release /p:Platform=x64
+
+    # 6. Exécuter windeployqt avec le bon chemin
+    - name: Deploy Application
+      run: |
+        C:\Qt\6.7.3\msvc2022_64\bin\windeployqt.exe x64\Release\PlanningPoker.exe
+
+    # 7. Créer un fichier ZIP avec les fichiers nécessaires
+    - name: Create ZIP Archive
+      run: |
+        mkdir release
+        copy x64\Release\PlanningPoker.exe release\
+        copy x64\Release\*.dll release\
+        tar -a -c -f release\PlanningPoker-v${{ github.run_number }}.zip release\*
+
+    # 8. Créer une release GitHub avec le fichier ZIP
+    - name: Create Release
+      uses: softprops/action-gh-release@v1
+      with:
+        files: release\PlanningPoker-v${{ github.run_number }}.zip
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
