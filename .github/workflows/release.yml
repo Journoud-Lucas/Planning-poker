@@ -27,11 +27,12 @@ jobs:
     - name: Setup MSBuild
       uses: microsoft/setup-msbuild@v1
 
-    # 4. Nettoyage des anciens builds
-    - name: Clean Previous Builds
+    # 4. Nettoyage du dossier Release uniquement
+    - name: Clean Previous Release Build
       run: |
-        if exist x64\Release rmdir /s /q x64\Release
-        if exist x64\Debug rmdir /s /q x64\Debug
+        if (Test-Path "x64\Release") {
+          Remove-Item -Recurse -Force "x64\Release"
+        }
 
     # 5. Compilation du projet en mode Release
     - name: Build Project (Release)
