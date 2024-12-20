@@ -36,8 +36,9 @@ jobs:
 
     # 5. Compilation du projet en mode Release
     - name: Build Project (Release)
+      shell: cmd
       run: |
-        cmd.exe /c "%ProgramFiles(x86)%\Microsoft Visual Studio\2019\BuildTools\VC\Auxiliary\Build\vcvars64.bat"
+        "%ProgramFiles(x86)%\Microsoft Visual Studio\2019\BuildTools\VC\Auxiliary\Build\vcvars64.bat"
         msbuild D:\a\Planning-poker\Planning-poker\PlanningPoker.sln /p:Configuration=Release /p:Platform=x64
 
     # 6. Exécuter windeployqt avec le bon chemin
