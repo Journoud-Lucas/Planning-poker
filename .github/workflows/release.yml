@@ -56,9 +56,9 @@ jobs:
         run: |
           powershell Compress-Archive -Path .\x64\Release -DestinationPath ./release.zip
 
-      # Upload the release artifact
+      # Upload the release artifact using the latest version v3
       - name: Upload Release ZIP
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: planning-poker-release
           path: release.zip
