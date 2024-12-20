@@ -21,7 +21,7 @@ jobs:
         version: 6.7.3
         host: windows
         target: desktop
-        arch: win64_msvc2019_64
+        arch: win64_msvc2022_64
 
     # 3. Installer MSBuild
     - name: Setup MSBuild
@@ -34,18 +34,22 @@ jobs:
           Remove-Item -Recurse -Force "x64\Release"
         }
 
-    # 5. Compilation du projet en mode Release
+    # 5. Configuration de Visual Studio 2022 avec vcvars64.bat
+    - name: Setup Visual Studio 2022
+      run: |
+        call "C:\Program Files\Microsoft Visual Studio\2022\BuildTools\VC\Auxiliary\Build\vcvars64.bat"
+
+    # 6. Compilation du projet en mode Release
     - name: Build Project (Release)
       run: |
-        call "%ProgramFiles(x86)%\Microsoft Visual Studio\2019\BuildTools\VC\Auxiliary\Build\vcvars64.bat"
         msbuild PlanningPoker.sln /p:Configuration=Release /p:Platform=x64
 
-    # 6. Exécuter windeployqt avec le bon chemin
+    # 7. Exécuter windeployqt avec le bon chemin
     - name: Deploy Application
       run: |
         C:\Qt\6.7.3\msvc2022_64\bin\windeployqt.exe x64\Release\PlanningPoker.exe
 
-    # 7. Créer un fichier ZIP avec les fichiers nécessaires
+    # 8. Créer un fichier ZIP avec les fichiers nécessaires
     - name: Create ZIP Archive
       run: |
         mkdir release
@@ -53,7 +57,7 @@ jobs:
         copy x64\Release\*.dll release\
         tar -a -c -f release\PlanningPoker-v${{ github.run_number }}.zip release\*
 
-    # 8. Créer une release GitHub avec le fichier ZIP
+    # 9. Créer une release GitHub avec le fichier ZIP
     - name: Create Release
       uses: softprops/action-gh-release@v1
       with:
