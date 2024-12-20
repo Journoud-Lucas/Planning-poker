@@ -35,6 +35,7 @@ jobs:
 
     # Install Chocolatey
     - name: Install Chocolatey
+      shell: powershell
       run: |
         Set-ExecutionPolicy Bypass -Scope Process -Force; `
         [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; `
@@ -46,8 +47,10 @@ jobs:
 
     # Set up Qt environment
     - name: Set up Qt environment
+      shell: powershell
       run: |
         echo "QT6_DIR=C:\\Qt\\6.7.3\\msvc2019_64" >> $GITHUB_ENV
+        echo "CMAKE_PREFIX_PATH=C:\\Qt\\6.7.3\\msvc2019_64" >> $GITHUB_ENV
 
     # Verify Qt installation
     - name: List Qt directory
@@ -63,6 +66,8 @@ jobs:
     # Build with MSBuild
     - name: Build with MSBuild
       shell: cmd
+      env:
+        QT_MSBUILD_PATH: C:\Qt\6.7.3\msvc2019_64
       run: |
         for /f "tokens=*" %%i in ('"C:\Program Files (x86)\Microsoft Visual Studio\Installer\vswhere.exe" -products * -requires Microsoft.VisualStudio.Component.VC.Tools.x86.x64 -property installationPath -latest') do set InstallDir=%%i
         call "%InstallDir%\VC\Auxiliary\Build\vcvars64.bat" && msbuild D:\a\Planning-poker\Planning-poker\PlanningPoker.sln /p:Configuration=Release /p:Platform=x64
